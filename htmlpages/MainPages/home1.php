@@ -22,11 +22,10 @@ session_start();
                 <p class="bg-info">Welcome to your personal page, you can review your registered personal information or search for a staff member
                 </p>
             </div>
-
         </div>
             <script src="../../scripts/staff.js"></script>
         </div>
-
     </div>
-
 </div>
+
+

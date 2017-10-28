@@ -1,3 +1,4 @@
+<!-- File that holds all functions to gather data from DB returning json -->
 <?php
 session_start();
 
@@ -15,11 +16,25 @@ function gatherPersonalInfo($sid){
         $_SESSION['birthdate'] = $row['birthdate'];
         $_SESSION['birthplace'] = $row['birthplace'];
         $_SESSION['photolink'] = $row['photolink'];
-        return true;
+        return json_encode($row);
 
     }else{
         $_SESSION['personalInfoPresent'] = false;
-        return false;
+        return json_encode($row);
     }
+
+}
+
+function gatherAllUser(){
+    require 'config/dbconfig.php';
+    $sql = "SELECT * from staff";
+    $result = mysqli_query($db,$sql);
+    $userlist = array();
+
+    while($r = mysqli_fetch_assoc($result)) {
+        $userlist[] = $r;
+    }
+
+    return json_encode($userlist);
 
 }

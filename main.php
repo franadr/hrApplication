@@ -40,14 +40,14 @@ require 'scripts/session.php';
          require 'htmlpages/MainPages/home1.php';
          exit();
      case 'home2':
-         if(isHR()){
+         if(isHR() || isAdmin()){
              require 'htmlpages/MainPages/home2.php';}
          else {echo '
                 Unauthorized </br> 
                  <a href="index.php">Back to home</a> ';}
          exit();
      case 'admin':
-         if(isHR()){
+         if(isAdmin()){
              require 'htmlpages/MainPages/admin.php';}
          else {echo '
                 Unauthorized </br> 

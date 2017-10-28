@@ -24,9 +24,9 @@ function isConnected()
 }
 
 function isHR(){
-    $staff_cat = $_SESSION['staff_cat'];
-    if(isset($staff_cat)){
-        if($staff_cat == "hr"){
+    $app_role = $_SESSION['app_role'];
+    if(isset($app_role)){
+        if($app_role == "hr"){
             return true;
         }
         return false;
@@ -36,9 +36,9 @@ function isHR(){
 }
 
 function isAdmin(){
-    $staff_cat = $_SESSION['staff_cat'];
-    if(isset($staff_cat)){
-        if($staff_cat == "admin"){
+    $app_role = $_SESSION['app_role'];
+    if(isset($app_role)){
+        if($app_role == "admin"){
             return true;
         }
         return false;

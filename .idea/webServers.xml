@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="3760e80a-27ec-4fe4-8fcd-5c7fc567ce0c" name="docker" url="http://localhost">
+        <fileTransfer port="0" mountedRoot="$USER_HOME$/CloudStation/Uni.lu/BINFO/Semestre 5/Web programming/docker-webprog-nginx-php-mysql 2/www" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>

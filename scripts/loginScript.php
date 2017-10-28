@@ -20,46 +20,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_SESSION['username'] = $row['username'];
         $_SESSION['password'] = $row['password'];
         $_SESSION['sid'] = $row['sid'];
-        $_SESSION['staff_cat'] = $row['staff_cat'];
+        $_SESSION['app_role'] = $row['app_role'];
 
 
-        if(isset($_SESSION['staff_cat'])){
-            if($_SESSION['staff_cat'] == "staff"){
+        if(isset($_SESSION['app_role'])){
+            if($_SESSION['app_role'] == "staff"){
                 header("location:../main.php?p=home1");
-            }elseif ($_SESSION['staff_cat'] == "hr"){
+            }elseif ($_SESSION['app_role'] == "hr"){
                 header("location:../main.php?p=home2");
-            }elseif ($_SESSION['staff_cat'] == "admin"){
+            }elseif ($_SESSION['app_role'] == "admin"){
                 header("location:../main.php?p=admin");
             }
         }else
         header("location:../main.php?p=login&message=no staff categories could be found please login again");
-    /*
-        $sql = "SELECT * FROM personal_info WHERE pid = '$personalInfoID'";
 
-            $result = mysqli_query($db,$sql);
-
-                $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-                if($row['pid']){
-                    $_SESSION['personalInfoPresent'] = true;
-                    $_SESSION['firstname'] = $row['firstname'];
-                    $_SESSION['lastname'] = $row['lastname'];
-                    $_SESSION['birthdate'] = $row['birthdate'];
-                    $_SESSION['birthplace'] = $row['birthplace'];
-                    $_SESSION['photolink'] = $row['photolink'];
-
-
-                }else{
-                    $_SESSION['personalInfoPresent'] = false;
-                }
-        header("location:../main.php?p=home1");
-
-
-    }else {
-
-        header("location:../main.php?p=login");
-
-    }
-    */
     }else
     header("location:../main.php?p=login&message=invalid login info");
 }
