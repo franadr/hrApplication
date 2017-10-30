@@ -14,36 +14,39 @@ require '../../scripts/dbscripts.php';
 
 <script>
     var infoPresent = "<?php echo $_SESSION['personalInfoPresent']; ?>" === "1";
+    var sid = "<?php echo $_SESSION['sid']; ?>";
 </script>
 
 <div class="col-md-4">
     <h2>Personal information :</h2>
-    <form>
+    <form id="pinfo">
 
         <div class="form-group">
-            <label for="fname">First name</label>
-            <input type="text" class="form-control" id="fname" value="<?php echo $userDecode->{'firstname'} ?>">
+            <label for="firstname">First name</label>
+            <input type="text" class="form-control" id="firstname" value="<?php echo $userDecode->{'firstname'} ?>">
         </div>
         <div class="form-group">
-            <label for="lname">Last name</label>
-            <input type="text" class="form-control" id="lname" value="<?php echo $userDecode->{'lastname'} ?>">
+            <label for="lastname">Last name</label>
+            <input type="text" class="form-control" id="lastname" value="<?php echo $userDecode->{'lastname'} ?>">
         </div>
         <div class="form-group">
-            <label for="bdate">Birthdate</label>
-            <input type="date" class="form-control" id="bdate" value="<?php echo $userDecode->{'birthdate'} ?>">
+            <label for="birthdate">Birthdate</label>
+            <input type="date" class="form-control" id="birthdate" value="<?php echo $userDecode->{'birthdate'} ?>">
         </div>
         <div class="form-group">
-            <label for="bplace">Birthpalce</label>
-            <input type="text" class="form-control" id="bplace" value="<?php echo $userDecode->{'birthplace'} ?>">
+            <label for="birthplace">Birthpalce</label>
+            <input type="text" class="form-control" id="birthplace" value="<?php echo $userDecode->{'birthplace'} ?>">
         </div>
         <div class="form-group">
-            <label for="plink">Last name</label>
-            <input type="text" class="form-control" id="plink" value="<?php echo $userDecode->{'photolink'} ?>">
+            <label for="photolink">Last name</label>
+            <input type="text" class="form-control" id="photolink" value="<?php echo $userDecode->{'photolink'} ?>">
         </div>
 
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="button" class="btn btn-default" id="submit">Save</button>
     </form>
 </div>
+
+<script src="../../scripts/personalInfo.js"></script>
 
 <!--
 <div class="col-md-4">

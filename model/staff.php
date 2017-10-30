@@ -8,10 +8,11 @@
 
  class staff
 {
-private $username;
-private $password;
-private $firstname;
-private $lastname;
-private $birthdate;
-private $birthplace;
+public $username;
+public $password;
+public $firstname;
+public $lastname;
+public $birthdate;
+public $birthplace;
+public $photolink;
 }
