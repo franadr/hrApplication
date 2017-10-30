@@ -1,14 +1,5 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Adriano
- * Date: 27/10/2017
- * Time: 11:49
- */
-
-session_start()
-    ?>
-
+<?php session_start() ?>
+<!--This is the home page for Admin group users -->
 <div class="container">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -26,4 +17,4 @@ session_start()
     </nav>
     <div id="selection"></div>
 </div>
-<script src="../../scripts/admin.js"></script>
+<script src="../../scripts/js/admin.js"></script>

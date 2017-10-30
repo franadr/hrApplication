@@ -38,7 +38,7 @@ require '../../scripts/dbscripts.php';
             <input type="text" class="form-control" id="birthplace" value="<?php echo $userDecode->{'birthplace'} ?>">
         </div>
         <div class="form-group">
-            <label for="photolink">Last name</label>
+            <label for="photolink">Photo link</label>
             <input type="text" class="form-control" id="photolink" value="<?php echo $userDecode->{'photolink'} ?>">
         </div>
 
@@ -46,7 +46,7 @@ require '../../scripts/dbscripts.php';
     </form>
 </div>
 
-<script src="../../scripts/personalInfo.js"></script>
+<script src="../../scripts/js/personalInfo.js"></script>
 
 <!--
 <div class="col-md-4">
@@ -82,6 +82,6 @@ require '../../scripts/dbscripts.php';
 </div>
 -->
 
-<script src="../../scripts/jqueryui.js"></script>
+<script src="../../scripts/js/jqueryui.js"></script>
 
 

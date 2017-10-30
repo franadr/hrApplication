@@ -1,7 +1,8 @@
-<!-- This is home page of user members of usergroup 'staff' -->
+
 <?php
 session_start();
 ?>
+<!--This is the home page for HR,Admin and Staff group users -->
 <div class="container">
     <nav class="navbar navbar-default">
         <div class="container-fuild">
@@ -23,7 +24,7 @@ session_start();
                 </p>
             </div>
         </div>
-            <script src="../../scripts/staff.js"></script>
+            <script src="../../scripts/js/staff.js"></script>
         </div>
     </div>
 </div>

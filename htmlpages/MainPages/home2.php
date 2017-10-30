@@ -3,7 +3,7 @@
 session_start();
 ?>
 
-
+<!--This is the home page for HR AND Admin group users -->
 <div class="container">
     <nav class="navbar navbar-default">
         <div class="container-fuild">
@@ -33,7 +33,7 @@ session_start();
             </div>
 
         </div>
-        <script src="../../scripts/staff.js"></script>
+        <script src="../../scripts/js/staff.js"></script>
     </div>
 
 </div>
@@ -42,4 +42,4 @@ session_start();
 
 
 <div id="selection"></div>
-<script src="../../scripts/hr.js"></script>
+<script src="../../scripts/js/hr.js"></script>
