@@ -1,21 +1,25 @@
 $('#submit').click(function () {
-    alert("saving p info ...");
+
     var firstname = $('#firstname').val();
     var lastname = $('#lastname').val();
     var birthdate = $('#birthdate').val();
     var birthplace = $('#birthplace').val();
+    var phonenumber = $('#phonenumber').val();
 
     $.ajax({
         type: "POST",
-        url: "../scripts/insertPinfo.php",
+        url: "/../scripts/php/dbscripts.php",
         data: {
+            "method":"pinfomod",
             "firstname":firstname,
             "lastname":lastname,
             "birthdate":birthdate,
-            "birthplace":birthplace
+            "birthplace":birthplace,
+            "phonenumber":phonenumber
         },
         success: function(msg){
             alert(msg);
+            $('#message').html("<h2>Your modification request has been registered please wait for its validation by HR department</h2>")
         }
     });
-})
+});

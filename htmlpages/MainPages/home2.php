@@ -21,7 +21,7 @@ session_start();
                     </ul>
                 </li>
                 <li> <a id="search">Search for staff</a></li>
-                <li> <a href="../../scripts/logout.php" type="button">Logout</a> </li>
+                <li> <a href="../../scripts/php/logoutScript.php" type="button">Logout</a> </li>
             </ul>
         </div>
     </nav>

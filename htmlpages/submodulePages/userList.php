@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../../scripts/dbscripts.php';
+require_once __DIR__."/../../scripts/php/dbscripts.php";
 
 $jsonusers = gatherAllUser();
 $users = json_decode($jsonusers);

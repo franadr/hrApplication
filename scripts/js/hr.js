@@ -1,3 +1,6 @@
+//This file holds the method to managed the selection of the user (showing a Submodule) and function related to hr user
+
+
 $('#pinfo').click(function () {
 
     $.ajax({
@@ -35,10 +38,9 @@ function validateMod(pid) {
 
     $.ajax({
         type: "POST",
-        data:{"pid":pid,"type":"validate"},
-        url: "../scripts/pinfomodTrigger.php",
+        data:{"method":"validatepinfo","pid":pid,"type":"validate"},
+        url: "../scripts/php/dbscripts.php",
         success: function(msg){
-            alert("200 ok :"+msg);
             $.ajax({
                 type: "GET",
                 url: "../htmlpages/submodulePages/pinfoMod.php",
@@ -54,8 +56,8 @@ function rejectMod(pid) {
 
     $.ajax({
         type: "POST",
-        data:{"pid":pid,"type":"reject"},
-        url: "../scripts/pinfomodTrigger.php",
+        data:{"method":"validatepinfo","pid":pid,"type":"reject"},
+        url: "../scripts/php/dbscripts.php",
         success: function(msg){
             alert("200 ok :"+msg);
             $.ajax({

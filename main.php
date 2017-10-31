@@ -1,5 +1,5 @@
 <?php
-require 'scripts/session.php';
+require 'scripts/php/sessionScript.php';
     if(isConnected()){
         $page = $_GET['p'];
     }else{

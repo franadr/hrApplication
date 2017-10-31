@@ -14,5 +14,6 @@ public $firstname;
 public $lastname;
 public $birthdate;
 public $birthplace;
+public $phonenumber;
 public $photolink;
 }

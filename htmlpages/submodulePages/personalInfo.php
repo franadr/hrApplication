@@ -1,14 +1,11 @@
 <?php
 session_start();
-require '../../scripts/dbscripts.php';
-
-
+require_once __DIR__."/../../scripts/php/dbscripts.php";
     $user = gatherPersonalInfo($_SESSION['sid']);
     $userDecode = json_decode($user);
-
 ?>
 
-
+<!-- This file hold the personal info form module that permit a user to do a personal info modification request -->
 
 
 
@@ -38,12 +35,18 @@ require '../../scripts/dbscripts.php';
             <input type="text" class="form-control" id="birthplace" value="<?php echo $userDecode->{'birthplace'} ?>">
         </div>
         <div class="form-group">
+            <label for="phonenumber">PhoneNumber</label>
+            <input type="text" class="form-control" id="phonenumber" value="<?php echo $userDecode->{'phonenumber'} ?>">
+        </div>
+        <div class="form-group">
             <label for="photolink">Photo link</label>
             <input type="text" class="form-control" id="photolink" value="<?php echo $userDecode->{'photolink'} ?>">
         </div>
 
         <button type="button" class="btn btn-default" id="submit">Save</button>
     </form>
+</div>
+<div class="col-md-4" id="message">
 </div>
 
 <script src="../../scripts/js/personalInfo.js"></script>

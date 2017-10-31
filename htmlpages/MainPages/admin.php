@@ -11,7 +11,7 @@
                 <li><a id="adduser">Add user</a></li>
                 <li><a id="moduser">Modify user</a></li>
                 <li><a id="deluser">Delete user</a></li>
-                <li> <a href="../../scripts/logout.php" type="button">Logout</a> </li>
+                <li> <a href="../../scripts/php/logoutScript.php" type="button">Logout</a> </li>
             </ul>
         </div>
     </nav>

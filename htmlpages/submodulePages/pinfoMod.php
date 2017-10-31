@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../../scripts/dbscripts.php';
+require_once __DIR__."/../../scripts/php/dbscripts.php";
 $pinfoMod=null;
 $json = gatherPersonalInfoMod_all();
 $pinfoMod = json_decode($json);
@@ -18,6 +18,7 @@ $pinfoMod = json_decode($json);
                     <th>Last name</th>
                     <th>Birthdate</th>
                     <th>Birthplace</th>
+                    <th>Phone number</th>
                     <th>Photo link</th>
                 </tr>
                 </thead>
@@ -29,6 +30,7 @@ $pinfoMod = json_decode($json);
                         <td><?php echo $pinfo->{'lastname'}; ?></td>
                         <td><?php echo $pinfo->{'birthdate'}; ?></td>
                         <td><?php echo $pinfo->{'birthplace'}; ?></td>
+                        <td><?php echo $pinfo->{'phonenumber'}; ?></td>
                         <td><?php echo $pinfo->{'photolink'}; ?></td>
                         <td><button onclick="validateMod('<?php echo $pinfo->{'pid'}; ?>')">Validate</button></td>
                         <td><button onclick="rejectMod('<?php echo $pinfo->{'pid'}; ?>')">Reject</button></td>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config/dbconfig.php';
+include __DIR__."/../config/dbconfig.php";
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $myusername = mysqli_real_escape_string($db,$_POST['username']);
@@ -25,15 +25,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         if(isset($_SESSION['app_role'])){
             if($_SESSION['app_role'] == "staff"){
-                header("location:../main.php?p=home1");
+                header("location:/../../main.php?p=home1");
             }elseif ($_SESSION['app_role'] == "hr"){
-                header("location:../main.php?p=home2");
+                header("location:/../../main.php?p=home2");
             }elseif ($_SESSION['app_role'] == "admin"){
-                header("location:../main.php?p=admin");
+                header("location:/../../main.php?p=admin");
             }
         }else
-        header("location:../main.php?p=login&message=no staff categories could be found please login again");
+        header("location: /../../main.php?p=login&message=no staff categories could be found please login again");
 
     }else
-    header("location:../main.php?p=login&message=invalid login info");
+    header("location: /../../main.php?p=login&message=invalid login info");
 }

@@ -2,7 +2,7 @@
 session_start();
 function isConnected()
 {
-    require 'config/dbconfig.php';
+    require __DIR__."/../config/dbconfig.php";
     if (isset($_SESSION['username']) && isset($_SESSION['password'])) {
         $username = $_SESSION['username'];
         $password = $_SESSION['password'];

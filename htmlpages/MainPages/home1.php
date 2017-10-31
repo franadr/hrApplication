@@ -11,7 +11,7 @@ session_start();
                 <li> <a type="button" id="pinfo">Modify personal info</a></li>
                 <li> <a id="jobinfo">View your job info</a></li>
                 <li> <a id="search">Search for staff</a></li>
-                <li> <a href="../../scripts/logout.php" type="button">Logout</a> </li>
+                <li> <a href="../../scripts/php/logoutScript.php" type="button">Logout</a> </li>
             </ul>
         </div>
 

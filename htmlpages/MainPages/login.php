@@ -14,7 +14,7 @@ session_destroy();
     <h2>Please enter your login information </h2>
     <div class="row" >
         <div class="col-sm-4">
-            <form action="/scripts/loginScript.php" method="post" >
+            <form action="/scripts/php/loginScript.php" method="post" >
                 <div class="form-group">
                     <label for="username">username</label>
                     <input type="text" class="form-control" name="username">
