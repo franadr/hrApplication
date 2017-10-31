@@ -1,5 +1,12 @@
 <?php
+/*
+ * this file hold the function to check wether a user is already connected and if he is an admin,hr or simple staff
+ */
 session_start();
+
+/*
+ * method to check wether the user still have an active session
+ */
 function isConnected()
 {
     require __DIR__."/../config/dbconfig.php";
@@ -23,6 +30,9 @@ function isConnected()
 
 }
 
+/*
+ * method to check wether the user is a member of HR group
+ */
 function isHR(){
     $app_role = $_SESSION['app_role'];
     if(isset($app_role)){
@@ -35,6 +45,9 @@ function isHR(){
 
 }
 
+/*
+ * method to check if the user is a member of Admin group
+ */
 function isAdmin(){
     $app_role = $_SESSION['app_role'];
     if(isset($app_role)){

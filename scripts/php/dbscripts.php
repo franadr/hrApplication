@@ -1,6 +1,12 @@
 <?php
+/*
+ * This file holds all script that access and modify DB (except for login scripts)
+ */
 session_start();
 require_once __DIR__."/../../model/staff.php";
+/*
+ * Condition that will trigger the correct method depending on the post argument 'method'
+ */
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $method = $_POST['method'];
 
@@ -31,8 +37,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 $user->birthplace = $_POST['birthplace'];
                 $user->phonenumber = $_POST['phonenumber'];
                 $user->photolink = $_POST['photolink'];
+                $user->password = $_POST['password'];
 
                 insertPersonalInfoMod(json_encode($user));
+                exit();
+            }
+            case 'modpass':{
+                $id = $_POST['id'];
+                $oldpassword = $_POST['oldpassword'];
+                $newpassword = $_POST['newpassword'];
+                modpass($id,$oldpassword,$newpassword);
                 exit();
             }
             default: echo 'Not recognize method';exit;
@@ -40,6 +54,29 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }else echo 'Method param not present';
 }
 
+
+/*
+ * Password modification method
+ */
+function modpass($id,$oldpass,$newpass){
+    require __DIR__."/../config/dbconfig.php";
+    $sql = "select * from staff where sid = '$id'";
+    $res = mysqli_query($db,$sql);
+    $passwordResult = mysqli_fetch_array($res,MYSQLI_ASSOC);
+    var_dump($passwordResult);
+    if($passwordResult['password'] === sha1($oldpass)){
+        $hasnewpassword = sha1($newpass);
+        $sql = "update staff set password ='$hasnewpassword' where sid ='$id'";
+        if(mysqli_query($db, $sql))
+            echo 'password changed';
+
+    }else
+        echo 'old password is incorrect, nothing updated';
+}
+
+/*
+ * user add method
+ */
 function addUser($username,$password){
     require __DIR__."/../config/dbconfig.php";
     $haspass = sha1($password);
@@ -54,6 +91,9 @@ function addUser($username,$password){
 }
 
 
+/*
+ * personal information gathering method
+ */
 
 function gatherPersonalInfo($sid){
     require __DIR__."/../config/dbconfig.php";
@@ -79,6 +119,10 @@ function gatherPersonalInfo($sid){
 
 }
 
+/*
+ * All username gathering method
+ */
+
 function gatherAllUser(){
     require __DIR__."/../config/dbconfig.php";
     $sql = "SELECT * from staff";
@@ -93,11 +137,16 @@ function gatherAllUser(){
 
 }
 
+
+/*
+ * add a new entry to the personal information modification table (temporary entry so the HR member can validate or not the info)
+ */
 function insertPersonalInfoMod($user)
 {
     require __DIR__."/../config/dbconfig.php";
     $sid = $_SESSION['sid'];
     $userdecode=json_decode($user);
+
     $sql = "INSERT into personal_info_mod (pid,firstname,lastname,birthdate,birthplace,phonenumber,photolink) VALUES ( '$sid',
                                                                                             '$userdecode->firstname',
                                                                                             '$userdecode->lastname',
@@ -107,12 +156,12 @@ function insertPersonalInfoMod($user)
                                                                                             '$userdecode->photoLink'
                                                                                             )";
     if(mysqli_query($db, $sql)){
-        echo 'query ok';
+        echo 'personal informations modification requested, an HR member needs to validate them';
         return 'ok';
     }
 
     else{
-        echo 'Database communication error , or you already ask for your personal info modifications :'.$db->error;
+        echo 'Database communication error , or you already ask for your personal info modifications : '.$db->error;
         return'nok';
     }
 
@@ -120,6 +169,9 @@ function insertPersonalInfoMod($user)
 
 }
 
+/*
+ * retrieve ALL personal info modification request
+ */
 function gatherPersonalInfoMod_all(){
     require __DIR__."/../config/dbconfig.php";
     $sql = "SELECT * FROM personal_info_mod ";
@@ -136,6 +188,9 @@ function gatherPersonalInfoMod_all(){
 
 }
 
+/*
+ * retrive a specific personal information modification request
+ */
 function gatherPersonalInfoMod($pid){
     require __DIR__."/../config/dbconfig.php";
     $sql = "SELECT * FROM personal_info_mod where pid=$pid ";
@@ -148,6 +203,9 @@ function gatherPersonalInfoMod($pid){
 
 }
 
+/*
+ * insert into personal info table the new information method
+ */
 function savePinfo($pid){
     require __DIR__."/../config/dbconfig.php";
     $pInfoTosave = json_decode(gatherPersonalInfoMod($pid));
@@ -169,7 +227,7 @@ function savePinfo($pid){
     if(mysqli_query($db, $sql)){
         $sql = "DELETE from personal_info_mod where pid = $pid";
         mysqli_query($db, $sql);
-        echo 'query ok';
+        echo 'personal info saved';
         return 'ok';
     }
 
@@ -179,9 +237,12 @@ function savePinfo($pid){
     }
 }
 
+/*
+ * method to delete the personal info modification request
+ */
 function deletePinfo($pid){
     require __DIR__."/../config/dbconfig.php";
     $sql = "DELETE from personal_info_mod where pid = $pid";
     mysqli_query($db, $sql);
-    return 'query ok';
+    echo 'temporary personal info deleted';
 }

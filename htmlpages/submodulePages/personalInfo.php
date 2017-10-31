@@ -5,7 +5,7 @@ require_once __DIR__."/../../scripts/php/dbscripts.php";
     $userDecode = json_decode($user);
 ?>
 
-<!-- This file hold the personal info form module that permit a user to do a personal info modification request -->
+<!--This file hold the personal info form module that permit a user to do a personal info modification request -->
 
 
 
@@ -45,8 +45,6 @@ require_once __DIR__."/../../scripts/php/dbscripts.php";
 
         <button type="button" class="btn btn-default" id="submit">Save</button>
     </form>
-</div>
-<div class="col-md-4" id="message">
 </div>
 
 <script src="../../scripts/js/personalInfo.js"></script>

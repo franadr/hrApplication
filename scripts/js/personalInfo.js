@@ -6,6 +6,7 @@ $('#submit').click(function () {
     var birthplace = $('#birthplace').val();
     var phonenumber = $('#phonenumber').val();
 
+
     $.ajax({
         type: "POST",
         url: "/../scripts/php/dbscripts.php",

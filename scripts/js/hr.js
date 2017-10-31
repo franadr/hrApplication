@@ -34,6 +34,17 @@ $('#modStaff').click(function refresh() {
     });
 });
 
+$('#modpass').click(function refresh() {
+
+    $.ajax({
+        type: "GET",
+        url: "../htmlpages/submodulePages/modifyPassword.php",
+        success: function(msg){
+            $("#selection").html(msg);
+        }
+    });
+});
+
 function validateMod(pid) {
 
     $.ajax({

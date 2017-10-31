@@ -1,4 +1,7 @@
 <?php
+/*
+ * This file hold the login logic and redirect depending on role the user is associated with
+ */
 session_start();
 include __DIR__."/../config/dbconfig.php";
 

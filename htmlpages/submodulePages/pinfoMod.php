@@ -6,6 +6,7 @@ $json = gatherPersonalInfoMod_all();
 $pinfoMod = json_decode($json);
 ?>
 
+<!-- Module that permit to and HR member to retrieve all personal info modification request  -->
 <div class="container">
     <div class="row">
         <div class="col-sm-6">

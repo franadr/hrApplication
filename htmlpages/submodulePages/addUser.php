@@ -1,3 +1,4 @@
+<!-- Module that permit to an admin member to add a new user in the system-->
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
