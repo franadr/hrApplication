@@ -49,9 +49,24 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 modpass($id,$oldpassword,$newpassword);
                 exit();
             }
+            case 'usernameCheck':{
+                $username = $_POST['username'];
+                usernameCheck($username);
+                exit();
+            }
             default: echo 'Not recognize method';exit;
         }
     }else echo 'Method param not present';
+}
+
+function usernameCheck($username){
+    require __DIR__."/../config/dbconfig.php";
+    $sql = "select * from staff where username='$username'";
+    $res = mysqli_query($db,$sql);
+    if(count(mysqli_fetch_array($res))>=1){
+        echo 'navailable';
+    }else
+        echo 'available';
 }
 
 

@@ -5,7 +5,7 @@
 
                 <div class="form-group">
                     <label for="username">New Username:</label>
-                    <input type="text" class="form-control" id="username">
+                    <input type="text" class="form-control" id="username" onkeyup="usernameCheck()"><span id="available"></span>
                 </div>
                 <div class="form-group">
                     <label for="password">Default password:</label>

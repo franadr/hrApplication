@@ -30,7 +30,6 @@ require 'scripts/php/sessionScript.php';
 
 </head>
 <body>
-<div id="message"></div>
 <script>var message = "<?php echo $_GET['message'] ?>"</script>
 <?php
  switch ($page){
@@ -64,6 +63,6 @@ require 'scripts/php/sessionScript.php';
 
 ?>
 
-<script src="scripts/js/main.js"></script>
+
 </body>
 </html>
