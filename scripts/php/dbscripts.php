@@ -4,6 +4,7 @@
  */
 session_start();
 require_once __DIR__."/../../model/staff.php";
+require_once __DIR__."/../../model/jobData.php";
 /*
  * Condition that will trigger the correct method depending on the post argument 'method'
  */
@@ -30,7 +31,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 exit();
             }
             case 'pinfomod':{
-                $user=new staff();
+                $user = new staff();
                 $user->firstname = $_POST['firstname'];
                 $user->lastname = $_POST['lastname'];
                 $user->birthdate = $_POST['birthdate'];
@@ -54,9 +55,20 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 usernameCheck($username);
                 exit();
             }
+            case 'saveJobData':{
+                $jobData = new jobData();
+                $jobData->jid = $_POST['jid'];
+                $jobData->contract_start = $_POST['contract_start'];
+                $jobData->contract_end = $_POST['contract_end'];
+                $jobData->salary = $_POST['salary'];
+                $jobData->bank_account = $_POST['bank_account'];
+                $jobData->working_hours = $_POST['working_hours'];
+                saveJobData($jobData);
+                exit();
+            }
             default: echo 'Not recognize method';exit;
         }
-    }else echo 'Method param not present';
+    };
 }
 
 function usernameCheck($username){
@@ -140,7 +152,7 @@ function gatherPersonalInfo($sid){
 
 function gatherAllUser(){
     require __DIR__."/../config/dbconfig.php";
-    $sql = "SELECT * from staff";
+    $sql = "SELECT * from staff where app_role<>'admin' ";
     $result = mysqli_query($db,$sql);
     $userlist = array();
 
@@ -218,6 +230,18 @@ function gatherPersonalInfoMod($pid){
 
 }
 
+function gatherJobInfo($pid){
+    require __DIR__."/../config/dbconfig.php";
+    $sql = "SELECT * FROM job_data where jid=$pid ";
+
+    $result = mysqli_query($db,$sql);
+
+    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+    return json_encode($row);
+
+}
+
 /*
  * insert into personal info table the new information method
  */
@@ -243,6 +267,35 @@ function savePinfo($pid){
         $sql = "DELETE from personal_info_mod where pid = $pid";
         mysqli_query($db, $sql);
         echo 'personal info saved';
+        return 'ok';
+    }
+
+    else{
+        echo "line 274".$db->error;
+        return'nok';
+    }
+}
+
+function saveJobData($jobData){
+    require __DIR__."/../config/dbconfig.php";
+
+
+    $sql = "INSERT into job_data (jid,contract_start,contract_end,salary,bank_account,working_hours) VALUES ( '$jobData->jid',
+                                                                                            '$jobData->contract_start',
+                                                                                            '$jobData->contract_end',
+                                                                                            '$jobData->salary',
+                                                                                            '$jobData->bank_account',
+                                                                                            '$jobData->working_hours'
+                                                                                          
+                                                                                            ) ON DUPLICATE KEY UPDATE 
+                                                                                            
+                                                                                            contract_start='$jobData->contract_start',
+                                                                                            contract_end='$jobData->contract_end',
+                                                                                            salary='$jobData->salary',
+                                                                                            bank_account='$jobData->bank_account',
+                                                                                            working_hours='$jobData->working_hours'";
+    if(mysqli_query($db, $sql)){
+        echo 'Job data saved';
         return 'ok';
     }
 

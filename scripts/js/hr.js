@@ -23,6 +23,17 @@ $('#search').click(function () {
     });
 });
 
+$('#jobinfo').click(function () {
+
+    $.ajax({
+        type: "GET",
+        url: "../htmlpages/submodulePages/userlist2.php",
+        success: function(msg){
+            $("#selection").html(msg);
+        }
+    });
+});
+
 $('#modStaff').click(function refresh() {
 
     $.ajax({
@@ -44,6 +55,45 @@ $('#modpass').click(function refresh() {
         }
     });
 });
+
+$('#saveJobData').click(function () {
+
+    jid = $('#jid').val();
+    contract_start = $('#contractStart').val();
+    contract_end = $('#contractEnd').val();
+    salary = $('#salary').val();
+    bank_account = $('#bankaccount').val();
+    working_hours = $('#hours').val();
+
+    $.ajax({
+        type: "POST",
+        url: "../scripts/php/dbscripts.php",
+        data:{  "method":"saveJobData",
+                "jid":jid,
+                "contract_start":contract_start,
+                "contract_end":contract_end,
+                "salary":salary,
+                "bank_account":bank_account,
+                "working_hours":working_hours},
+        success: function(msg){
+            alert(msg);
+        }
+    });
+})
+
+function selectUser(sid) {
+
+
+    $.ajax({
+        type: "POST",
+        url: "../htmlpages/submodulePages/jobinfo.php",
+        data:{"sid":sid},
+        success: function(msg){
+            $("#selectedUser").html(msg);
+        }
+    });
+
+};
 
 function validateMod(pid) {
 
