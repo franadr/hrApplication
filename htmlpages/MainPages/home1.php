@@ -8,7 +8,7 @@ session_start();
         <div class="container-fuild">
             <div class="navbar-header navbar-brand" >Staff home page</div>
             <ul class="nav navbar-nav">
-                <li> <a type="button" id="pinfo">Modify personal info</a></li>
+                <li> <a type="button" id="pinfo">My personal informations</a></li>
                 <li> <a id="jobinfo">View your job info</a></li>
                 <li> <a id="search">Search for staff</a></li>
                 <li><a id="modpass">Modify Password</a></li>

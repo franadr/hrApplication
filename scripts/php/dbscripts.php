@@ -358,7 +358,7 @@ function deletePinfo($pid){
 
 function getAllStaffcat(){
     require __DIR__."/../config/dbconfig.php";
-    $sql = "select * from staff_cat";
+    $sql = "select * from staff_cat where scid <> 6";
     $res = mysqli_query($db,$sql);
 
 

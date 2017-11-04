@@ -9,7 +9,7 @@ session_start();
         <div class="container-fuild">
             <div class="navbar-header navbar-brand" >HR home page</div>
             <ul class="nav navbar-nav">
-                <li> <a id="pinfo">Modify personal info</a></li>
+                <li> <a id="pinfo">My personal informations</a></li>
                 <li> <a id="jobinfo">Staff job information</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
