@@ -184,7 +184,7 @@ function deleteStaff_cat(scid){
         data:{"method":"deleteStaffCat","scid":scid},
         url: "../scripts/php/dbscripts.php",
         success: function(msg){
-            alert("Staff category has been deleted, staff with delete category where update with \'none\' category ");
+            alert("Staff category has been deleted, staff with delete category where update with \'!NONE!\' category ");
             $.ajax({
                 type: "GET",
                 url: "../htmlpages/submodulePages/staffCat_Faculty.php",
