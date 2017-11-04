@@ -16,7 +16,7 @@ session_start();
                         Modification
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li> <a id="modStaff">Staff Info</a></li>
+                        <li> <a id="modStaff">Staff Info Modification request</a></li>
                         <li> <a id="modStaffCat">Staff Categories</a></li>
                     </ul>
                 </li>

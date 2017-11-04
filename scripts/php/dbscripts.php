@@ -107,9 +107,24 @@ function modpass($id,$oldpass,$newpass){
 function addUser($username,$password){
     require __DIR__."/../config/dbconfig.php";
     $haspass = sha1($password);
+
+    //First inserting the staff entry
     $sql = "Insert into staff (username,password) VALUES ('$username','$haspass')";
     if(mysqli_query($db, $sql)){
+        //then gathering the new staff_id
+        $sql = "select sid from staff where username='$username'AND password='$haspass'";
 
+        $res= mysqli_query($db,$sql);
+        $pidrow = mysqli_fetch_array($res,MYSQLI_ASSOC);
+        $pid = $pidrow['sid'];
+
+        //creating empty rows ont the other info tables
+            $sql = "insert into personal_info (pid) values ('$pid')";
+            mysqli_query($db, $sql);
+            echo $db->error;
+            $sql = "insert into job_data (jid) values ('$pid')";
+            mysqli_query($db, $sql);
+            echo $db->error;
         echo 'user inserted';
     }else{
 
@@ -122,12 +137,15 @@ function addUser($username,$password){
  * personal information gathering method
  */
 
-function gatherPersonalInfo($sid){
+function gatherAllInfo($sid){
     require __DIR__."/../config/dbconfig.php";
-    $sql = "SELECT * FROM personal_info WHERE pid = '$sid'";
+    $sql = "SELECT * FROM staff,personal_info,job_data,staff_cat  WHERE 
+                                                                  staff.sid = '$sid' 
+                                                                  AND personal_info.pid = '$sid'
+                                                                  AND job_data.jid='$sid'
+                                                                  AND staff_cat.scid=job_data.staff_cat";
 
     $result = mysqli_query($db,$sql);
-
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     if($row['pid']){
         $_SESSION['personalInfoPresent'] = true;
@@ -152,8 +170,12 @@ function gatherPersonalInfo($sid){
 
 function gatherAllUser(){
     require __DIR__."/../config/dbconfig.php";
-    $sql = "SELECT * from staff where app_role<>'admin' ";
+    $sql = "SELECT * from staff,personal_info,job_data,staff_cat where  staff.app_role<>'admin'
+                                                                        AND personal_info.pid=staff.sid 
+                                                                        AND job_data.jid=staff.sid 
+                                                                        AND staff_cat.scid = job_data.staff_cat ";
     $result = mysqli_query($db,$sql);
+    echo $db->error;
     $userlist = array();
 
     while($r = mysqli_fetch_assoc($result)) {
@@ -221,18 +243,6 @@ function gatherPersonalInfoMod_all(){
 function gatherPersonalInfoMod($pid){
     require __DIR__."/../config/dbconfig.php";
     $sql = "SELECT * FROM personal_info_mod where pid=$pid ";
-
-    $result = mysqli_query($db,$sql);
-
-    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-
-    return json_encode($row);
-
-}
-
-function gatherJobInfo($pid){
-    require __DIR__."/../config/dbconfig.php";
-    $sql = "SELECT * FROM job_data where jid=$pid ";
 
     $result = mysqli_query($db,$sql);
 

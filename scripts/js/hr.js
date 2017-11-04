@@ -77,6 +77,9 @@ $('#saveJobData').click(function () {
                 "working_hours":working_hours},
         success: function(msg){
             alert(msg);
+            $.get("../htmlpages/submodulePages/userlist2.php",false,function (msg) {
+                $("#selection").html(msg);
+            })
         }
     });
 })

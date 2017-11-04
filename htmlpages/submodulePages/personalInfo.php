@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once __DIR__."/../../scripts/php/dbscripts.php";
-    $user = gatherPersonalInfo($_SESSION['sid']);
+    $user = gatherAllInfo($_SESSION['sid']);
     $userDecode = json_decode($user);
 ?>
 
