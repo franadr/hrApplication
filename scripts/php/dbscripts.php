@@ -63,12 +63,41 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 $jobData->salary = $_POST['salary'];
                 $jobData->bank_account = $_POST['bank_account'];
                 $jobData->working_hours = $_POST['working_hours'];
+                $jobData->staff_cat = $_POST['staff_cat'];
                 saveJobData($jobData);
+                exit();
+            }
+            case 'createStaffCat':{
+                $newStaffCat = $_POST['newStaffCat'];
+                createStaffCat($newStaffCat);
+                exit();
+            }
+            case 'deleteStaffCat':{
+                $scid = $_POST['scid'];
+                deleteStaffCat($scid);
                 exit();
             }
             default: echo 'Not recognize method';exit;
         }
     };
+}
+
+function deleteStaffCat($scid){
+    require __DIR__."/../config/dbconfig.php";
+    $sql = "DELETE from staff_cat where scid = $scid";
+    if(mysqli_query($db,$sql))
+        echo 'cat deleted';
+    else
+        echo $db->error;
+}
+function createStaffCat($newStaffCat){
+    require __DIR__."/../config/dbconfig.php";
+    $sql = "insert into staff_cat (category) values ('$newStaffCat')";
+    if(mysqli_query($db,$sql))
+        echo 'cat inserted';
+    else
+        echo $db->error;
+
 }
 
 function usernameCheck($username){
@@ -290,12 +319,13 @@ function saveJobData($jobData){
     require __DIR__."/../config/dbconfig.php";
 
 
-    $sql = "INSERT into job_data (jid,contract_start,contract_end,salary,bank_account,working_hours) VALUES ( '$jobData->jid',
+    $sql = "INSERT into job_data (jid,contract_start,contract_end,salary,bank_account,working_hours,staff_cat) VALUES ( '$jobData->jid',
                                                                                             '$jobData->contract_start',
                                                                                             '$jobData->contract_end',
                                                                                             '$jobData->salary',
                                                                                             '$jobData->bank_account',
-                                                                                            '$jobData->working_hours'
+                                                                                            '$jobData->working_hours',
+                                                                                            '$jobData->staff_cat'
                                                                                           
                                                                                             ) ON DUPLICATE KEY UPDATE 
                                                                                             
@@ -303,7 +333,8 @@ function saveJobData($jobData){
                                                                                             contract_end='$jobData->contract_end',
                                                                                             salary='$jobData->salary',
                                                                                             bank_account='$jobData->bank_account',
-                                                                                            working_hours='$jobData->working_hours'";
+                                                                                            working_hours='$jobData->working_hours',
+                                                                                            staff_cat='$jobData->staff_cat'";
     if(mysqli_query($db, $sql)){
         echo 'Job data saved';
         return 'ok';
@@ -323,4 +354,21 @@ function deletePinfo($pid){
     $sql = "DELETE from personal_info_mod where pid = $pid";
     mysqli_query($db, $sql);
     echo 'temporary personal info deleted';
+}
+
+function getAllStaffcat(){
+    require __DIR__."/../config/dbconfig.php";
+    $sql = "select * from staff_cat";
+    $res = mysqli_query($db,$sql);
+
+
+    $staffCats = array();
+
+    while($r = mysqli_fetch_assoc($res)) {
+        $staffCats[] = $r;
+    }
+
+
+    return json_encode($staffCats);
+
 }

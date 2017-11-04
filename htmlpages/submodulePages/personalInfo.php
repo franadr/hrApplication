@@ -19,23 +19,23 @@ require_once __DIR__."/../../scripts/php/dbscripts.php";
     <form id="pinfo">
 
         <div class="form-group">
-            <label for="firstname">First name</label>
+            <label for="firstname">*First name</label>
             <input type="text" class="form-control" id="firstname" value="<?php echo $userDecode->{'firstname'} ?>">
         </div>
         <div class="form-group">
-            <label for="lastname">Last name</label>
+            <label for="lastname">*Last name</label>
             <input type="text" class="form-control" id="lastname" value="<?php echo $userDecode->{'lastname'} ?>">
         </div>
         <div class="form-group">
-            <label for="birthdate">Birthdate</label>
+            <label for="birthdate">*Birthdate</label>
             <input type="date" class="form-control" id="birthdate" value="<?php echo $userDecode->{'birthdate'} ?>">
         </div>
         <div class="form-group">
-            <label for="birthplace">Birthpalce</label>
+            <label for="birthplace">*Birthpalce</label>
             <input type="text" class="form-control" id="birthplace" value="<?php echo $userDecode->{'birthplace'} ?>">
         </div>
         <div class="form-group">
-            <label for="phonenumber">PhoneNumber</label>
+            <label for="phonenumber">*PhoneNumber</label>
             <input type="text" class="form-control" id="phonenumber" value="<?php echo $userDecode->{'phonenumber'} ?>">
         </div>
         <div class="form-group">
@@ -43,7 +43,7 @@ require_once __DIR__."/../../scripts/php/dbscripts.php";
             <input type="text" class="form-control" id="photolink" value="<?php echo $userDecode->{'photolink'} ?>">
         </div>
 
-        <button type="button" class="btn btn-default" id="submit">Save</button>
+        <button type="button" class="btn btn-default" id="submit">Save</button><span id="req"></span>
     </form>
 </div>
 

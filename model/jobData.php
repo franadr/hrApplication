@@ -14,5 +14,6 @@ public $contract_end;
 public $salary;
 public $working_hours;
 public $bank_account;
+public $staff_cat;
 
 }

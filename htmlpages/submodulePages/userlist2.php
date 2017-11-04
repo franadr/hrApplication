@@ -6,6 +6,7 @@ $jsonusers = gatherAllUser();
 $users = json_decode($jsonusers);
 ?>
 <div class="container">
+    <h3> Registered staff list :</h3>
     <div class="row">
         <div class="col-sm-6">
             <table class="table">
@@ -17,7 +18,7 @@ $users = json_decode($jsonusers);
                     <th>First Name</th>
                     <th>Last name</th>
                     <th>Staff category</th>
-                    <th>Select ?</th>
+                    <th>Modify job Data</th>
 
                 </tr>
                 </thead>

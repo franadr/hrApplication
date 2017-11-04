@@ -4,12 +4,13 @@ require_once __DIR__."/../../scripts/php/dbscripts.php";
 $pinfoMod=null;
 $json = gatherPersonalInfoMod_all();
 $pinfoMod = json_decode($json);
+if(count($pinfoMod) > 0){
 ?>
 
 <!-- Module that permit to and HR member to retrieve all personal info modification request  -->
 <div class="container">
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-10">
             <h2>List of user personal info modification request </h2>
             <table class="table">
                 <thead>
@@ -21,6 +22,7 @@ $pinfoMod = json_decode($json);
                     <th>Birthplace</th>
                     <th>Phone number</th>
                     <th>Photo link</th>
+                    <th>Options ?</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,8 +35,8 @@ $pinfoMod = json_decode($json);
                         <td><?php echo $pinfo->{'birthplace'}; ?></td>
                         <td><?php echo $pinfo->{'phonenumber'}; ?></td>
                         <td><?php echo $pinfo->{'photolink'}; ?></td>
-                        <td><button onclick="validateMod('<?php echo $pinfo->{'pid'}; ?>')">Validate</button></td>
-                        <td><button onclick="rejectMod('<?php echo $pinfo->{'pid'}; ?>')">Reject</button></td>
+                        <td><button onclick="validateMod('<?php echo $pinfo->{'pid'}; ?>')">Validate</button>
+                        <button onclick="rejectMod('<?php echo $pinfo->{'pid'}; ?>')">Reject</button></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
@@ -54,3 +56,4 @@ $pinfoMod = json_decode($json);
         <div class="col-sm-4"></div>
     </div>
 </div>
+<?php }else echo "No personal information request has been registered" ?>

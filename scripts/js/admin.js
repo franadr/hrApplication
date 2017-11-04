@@ -36,7 +36,7 @@ $('#SubmitUser').click(function () {
         },
         success: function(msg){
             alert(msg);
-            $('#message').html("<h2>Your modification request has been registered please wait for its validation by HR department</h2>")
+            $('#selection').html('../htmlpages/submodulePages/addUser.php');
         }
     });
 });
