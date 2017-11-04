@@ -17,7 +17,7 @@ require_once __DIR__."/../../scripts/php/dbscripts.php";
 <div class="col-md-4">
     <h2>Personal information :</h2>
     <form id="pinfo">
-
+        <img src="../../images/favicon.jpg" class="img-thumbnail" width="100px">
         <div class="form-group">
             <label for="firstname">*First name</label>
             <input type="text" class="form-control" id="firstname" value="<?php echo $userDecode->{'firstname'} ?>">

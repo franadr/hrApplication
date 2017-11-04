@@ -13,7 +13,7 @@ session_destroy();
     </nav>
     <h2>Please enter your login information </h2>
     <div class="row" >
-        <div class="col-sm-4">
+        <div class="col-sm-4 ">
             <form action="/scripts/php/loginScript.php" method="post" >
                 <div class="form-group">
                     <label for="username">username</label>
