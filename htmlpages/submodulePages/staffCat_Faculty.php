@@ -22,8 +22,8 @@ $staffCats = json_decode(getAllStaffcat());
                 </tr>
                 <?php endforeach; ?>
                 <tr>
-                    <td><input type="text" id="newStaff_cat"></td>
-                    <td id="addsc"><button  onclick="createStaff_cat()">Create staff category</button></td>
+                    <td><label for="newStaff_cat">New staff category :</label><input type="text" id="newStaff_cat" onkeyup="categoryCheck()"></td>
+                    <td id="addsc"></td>
                 </tr>
                 </tbody>
             </table>
@@ -44,3 +44,4 @@ $staffCats = json_decode(getAllStaffcat());
         <div class="col-sm-4"></div>
     </div>
 </div>
+<script src="../../scripts/js/hr.js"></script>

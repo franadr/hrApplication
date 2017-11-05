@@ -1,8 +1,4 @@
 //This file holds the method to managed the selection of the user (showing a Submodule) and function related to hr user
-if($('#newStaff_cat')==='')
-    $('#addsc').hide();
-else
-    $('#addsc').show();
 
 
 $('#pinfo').click(function () {
@@ -193,6 +189,26 @@ function deleteStaff_cat(scid){
                     $("#selection").html(msg);
                 }
             });
+        }
+    });
+}
+
+function categoryCheck(){
+    var newCategory = $('#newStaff_cat').val();
+    $.ajax({
+        type: "POST",
+        url: "/../scripts/php/dbscripts.php",
+        data: {
+            "method":"staffCatCheck",
+            "newCategory":newCategory
+        },
+        success: function(msg){
+            if(msg === 'available' && $('#newStaff_cat').val() !== ''){
+                $('#addsc').html('<button onclick="createStaff_cat()">Create staff category</button>');
+            }else{
+                $('#addsc').html('Staff category already exists');
+
+            }
         }
     });
 }

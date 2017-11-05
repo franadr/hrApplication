@@ -77,9 +77,23 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 deleteStaffCat($scid);
                 exit();
             }
+            case 'staffCatCheck':{
+                $newCategory = $_POST['newCategory'];
+                staffCatCheck($newCategory);
+                exit();
+            }
             default: echo 'Not recognize method';exit;
         }
     };
+}
+function staffCatCheck($newCategory){
+    require __DIR__."/../config/dbconfig.php";
+    $sql = "select * from staff_cat where category='$newCategory'";
+    $res = mysqli_query($db,$sql);
+    if(count(mysqli_fetch_array($res))>=1){
+        echo 'navailable';
+    }else
+        echo 'available';
 }
 
 function deleteStaffCat($scid){
