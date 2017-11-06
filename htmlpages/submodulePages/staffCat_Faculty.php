@@ -6,23 +6,23 @@ $staffCats = json_decode(getAllStaffcat());
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-4">
-            <table class="table">
+        <div class="col-sm-1">
+            <table class="table table-responsive table-hover">
                 <thead>
                 <tr>
-                    <th>Staff category name</th>
-                    <th>Option</th>
+                    <th class="col-md-1">Category name</th>
+                    <th class="col-md-1">Option</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($staffCats as $staffCat): ?>
                 <tr>
                     <td id="<?php echo $staffCat->{'scid'} ?>"><?php echo $staffCat->{'category'} ?></td>
-                    <td><button onclick="deleteStaff_cat('<?php echo $staffCat->{'scid'} ?>')">Delete</button></td>
+                    <td><button class="btn btn-danger " onclick="deleteStaff_cat('<?php echo $staffCat->{'scid'} ?>')"><span class="glyphicon glyphicon-remove"></span></button></td>
                 </tr>
                 <?php endforeach; ?>
                 <tr>
-                    <td><label for="newStaff_cat">New staff category :</label><input type="text" id="newStaff_cat" onkeyup="categoryCheck()"></td>
+                    <td><label for="newStaff_cat">New staff category</label><input data-toggle="tooltip" title="Category already exists" class="form-control" type="text" id="newStaff_cat" onkeyup="categoryCheck()"></td>
                     <td id="addsc"></td>
                 </tr>
                 </tbody>

@@ -13,10 +13,11 @@ require_once __DIR__."/../../scripts/php/dbscripts.php";
     var infoPresent = "<?php echo $_SESSION['personalInfoPresent']; ?>" === "1";
     var sid = "<?php echo $_SESSION['sid']; ?>";
 </script>
-
+<div class="col-md-4"></div>
 <div class="col-md-4">
-    <h2>Personal information :</h2>
+
     <form id="pinfo">
+        <h3>Personal information :</h3>
         <img src="../../images/favicon.jpg" class="img-thumbnail" width="100px">
         <div class="form-group">
             <label for="firstname">*First name</label>

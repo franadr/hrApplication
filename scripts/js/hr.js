@@ -1,6 +1,5 @@
 //This file holds the method to managed the selection of the user (showing a Submodule) and function related to hr user
 
-
 $('#pinfo').click(function () {
 
     $.ajax({
@@ -204,9 +203,11 @@ function categoryCheck(){
         },
         success: function(msg){
             if(msg === 'available' && $('#newStaff_cat').val() !== ''){
-                $('#addsc').html('<button onclick="createStaff_cat()">Create staff category</button>');
+                $('#addsc').html('<button class="btn btn-success btn-sm btn-success" onclick="createStaff_cat()"><span class="glyphicon glyphicon-floppy-saved"></span></button>');
+
             }else{
-                $('#addsc').html('Staff category already exists');
+
+                $('#addsc').html('not available');
 
             }
         }

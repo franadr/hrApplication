@@ -35,8 +35,8 @@ if(count($pinfoMod) > 0){
                         <td><?php echo $pinfo->{'birthplace'}; ?></td>
                         <td><?php echo $pinfo->{'phonenumber'}; ?></td>
                         <td><?php echo $pinfo->{'photolink'}; ?></td>
-                        <td><button onclick="validateMod('<?php echo $pinfo->{'pid'}; ?>')">Validate</button>
-                        <button onclick="rejectMod('<?php echo $pinfo->{'pid'}; ?>')">Reject</button></td>
+                        <td><button class="btn success" onclick="validateMod('<?php echo $pinfo->{'pid'}; ?>')">Validate</button>
+                        <button class="btn danger" onclick="rejectMod('<?php echo $pinfo->{'pid'}; ?>')">Reject</button></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

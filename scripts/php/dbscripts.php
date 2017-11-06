@@ -120,6 +120,7 @@ function usernameCheck($username){
     $res = mysqli_query($db,$sql);
     if(count(mysqli_fetch_array($res))>=1){
         echo 'navailable';
+
     }else
         echo 'available';
 }

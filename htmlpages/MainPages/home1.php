@@ -6,13 +6,16 @@ session_start();
 <div class="container">
     <nav class="navbar navbar-default">
         <div class="container-fuild">
-            <div class="navbar-header navbar-brand" >Staff home page</div>
+            <div class="navbar-header navbar-brand" >HR application</div>
             <ul class="nav navbar-nav">
-                <li> <a type="button" id="pinfo">My personal informations</a></li>
+
                 <li> <a id="jobinfo">View your job info</a></li>
                 <li> <a id="search">Search for staff</a></li>
                 <li><a id="modpass">Modify Password</a></li>
-                <li> <a href="../../scripts/php/logoutScript.php" type="button">Logout</a> </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a id="pinfo" type="button"><span class="glyphicon glyphicon-user" ></span> My info</a></li>
+                <li><a href="../../scripts/php/logoutScript.php" type="button"><span class="glyphicon glyphicon-log-out"></span>Logout   </a></li>
             </ul>
         </div>
 
