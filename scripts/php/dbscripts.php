@@ -90,9 +90,30 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 staffCatCheck($newCategory);
                 exit();
             }
+            case 'uploadPhoto':{
+                 $photo = $_FILES['file'];
+                 $username = $_POST['username'];
+                 uploadPhoto($photo,$username);
+                 exit();
+            }
             default: echo 'Not recognize method';exit;
         }
     };
+}
+
+function uploadPhoto($photo,$username){
+    if (isset($photo['name'])) {
+        if (0 < $photo['error']) {
+            echo 'Error during file upload' . $photo['error'];
+        } else {
+                move_uploaded_file($_FILES['file']['tmp_name'], '../../images/userPhoto/' . $username);
+                echo 'File successfully uploaded : ' . $photo['name'];
+            }
+
+    } else {
+        echo 'Please choose a file';
+    }
+
 }
 
 function saveFaculties($faculties,$sid){

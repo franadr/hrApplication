@@ -10,7 +10,7 @@ require_once __DIR__."/../../scripts/php/dbscripts.php";
 
 
 <script>
-    var infoPresent = "<?php echo $_SESSION['personalInfoPresent']; ?>" === "1";
+    var username = "<?php echo $userDecode->{'username'} ?>";
     var sid = "<?php echo $_SESSION['sid']; ?>";
 </script>
 <div class="col-md-4"></div>
@@ -18,7 +18,10 @@ require_once __DIR__."/../../scripts/php/dbscripts.php";
 
     <form id="pinfo">
         <h3>Personal information :</h3>
-        <img src="../../images/favicon.jpg" class="img-thumbnail" width="100px">
+                <img src="../../images/userPhoto/<?php echo $userDecode->{'username'} ?>" class="img-thumbnail" width="100px">
+
+
+
         <div class="form-group">
             <label for="firstname">*First name</label>
             <input type="text" class="form-control" id="firstname" value="<?php echo $userDecode->{'firstname'} ?>">
@@ -40,11 +43,10 @@ require_once __DIR__."/../../scripts/php/dbscripts.php";
             <input type="text" class="form-control" id="phonenumber" value="<?php echo $userDecode->{'phonenumber'} ?>">
         </div>
         <div class="form-group">
-            <label for="photolink">Photo link</label>
-            <input type="text" class="form-control" id="photolink" value="<?php echo $userDecode->{'photolink'} ?>">
+            <label for="photolink">Photo</label>
+            <input type="file" class="btn btn-default btn-sm " accept="image/*" id="photo">
+            <button type="button" class="btn btn-success btn-xs" id="uploadPhoto">Upload</button>
         </div>
-
-
 
         <button type="button" class="btn btn-default" id="submit">Save</button><span id="req"></span>
     </form>
