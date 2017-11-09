@@ -321,7 +321,7 @@ function insertPersonalInfoMod($user)
     }
 
     else{
-        echo 'Database communication error , or you already ask for your personal info modifications : '.$db->error;
+        echo 'You already ask for your personal info modifications, please wait for its validation ';
         return'nok';
     }
 

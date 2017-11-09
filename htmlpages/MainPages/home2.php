@@ -17,7 +17,7 @@ session_start();
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li> <a id="modStaff" type="button">Staff Info Modification request</a></li>
-                        <li> <a id="modStaffCatFac" type="button">Staff Categories and Faculties</a></li>
+                        <li> <a id="modStaffCatFac" type="button">Staff Categories </a></li>
                     </ul>
                 </li>
                 <li> <a id="search" type="button">Search for staff</a></li>

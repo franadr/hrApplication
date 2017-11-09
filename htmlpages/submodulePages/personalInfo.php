@@ -13,43 +13,72 @@ require_once __DIR__."/../../scripts/php/dbscripts.php";
     var username = "<?php echo $userDecode->{'username'} ?>";
     var sid = "<?php echo $_SESSION['sid']; ?>";
 </script>
-<div class="col-md-4"></div>
+
 <div class="col-md-4">
 
     <form id="pinfo">
-        <h3>Personal information :</h3>
+        <div class="row">
+            <div class="col-xs-6 col-xs-offset-3">
                 <img src="../../images/userPhoto/<?php echo $userDecode->{'username'} ?>" class="img-thumbnail" width="100px">
+            </div>
+        </div>
 
 
 
-        <div class="form-group">
-            <label for="firstname">*First name</label>
-            <input type="text" class="form-control" id="firstname" value="<?php echo $userDecode->{'firstname'} ?>">
+
+        <div class="form-group row">
+            <div class="col-xs-6">
+                <label for="firstname">*First name</label>
+                <input type="text" class="form-control" id="firstname" value="<?php echo $userDecode->{'firstname'} ?>">
+            </div>
+            <div class="col-xs-6">
+                <label for="lastname">*Last name</label>
+                <input type="text" class="form-control" id="lastname" value="<?php echo $userDecode->{'lastname'} ?>">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-xs-6">
+                <label for="birthdate">*Birthdate</label>
+                <input type="date" class="form-control" id="birthdate" value="<?php echo $userDecode->{'birthdate'} ?>">
+            </div>
+            <div class="col-xs-6">
+                <label for="birthplace">*Birthpalce</label>
+                <input type="text" class="form-control" id="birthplace" value="<?php echo $userDecode->{'birthplace'} ?>">
+            </div>
         </div>
         <div class="form-group">
-            <label for="lastname">*Last name</label>
-            <input type="text" class="form-control" id="lastname" value="<?php echo $userDecode->{'lastname'} ?>">
+
         </div>
-        <div class="form-group">
-            <label for="birthdate">*Birthdate</label>
-            <input type="date" class="form-control" id="birthdate" value="<?php echo $userDecode->{'birthdate'} ?>">
+        <div class="form-group row">
+            <div class="col-xs-6">
+                <label for="phonenumber">*Primary phone</label>
+                <input type="text" class="form-control" id="phonenumber" value="<?php echo $userDecode->{'phonenumber'} ?>">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="birthplace">*Birthpalce</label>
-            <input type="text" class="form-control" id="birthplace" value="<?php echo $userDecode->{'birthplace'} ?>">
+        <div class="form-group row">
+            <div class="col-xs-6">
+                <label for="address">*Primary Address</label>
+                <input type="text" class="form-control" id="address" value="none...">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="phonenumber">*PhoneNumber</label>
-            <input type="text" class="form-control" id="phonenumber" value="<?php echo $userDecode->{'phonenumber'} ?>">
+        <div class="form-group row">
+            <div class="col-xs-8">
+                <label for="photolink">Photo</label>
+                <input type="file" class="btn btn-default btn-sm " accept="image/*" id="photo">
+                <button type="button" class="btn btn-success btn-xs" id="uploadPhoto">Upload</button>
+            </div>
+
         </div>
-        <div class="form-group">
-            <label for="photolink">Photo</label>
-            <input type="file" class="btn btn-default btn-sm " accept="image/*" id="photo">
-            <button type="button" class="btn btn-success btn-xs" id="uploadPhoto">Upload</button>
-        </div>
+
 
         <button type="button" class="btn btn-default" id="submit">Save</button><span id="req"></span>
     </form>
+</div>
+<div class="col-sm-4">
+    <h3>Personal information</h3>
+    <p>This page allows you to review and make a request for personal information modification.</p>
+    <p> <em>Please note that when you save your request, a human ressource member need to validate the modification before registering them.</em></p>
 </div>
 
 <script src="../../scripts/js/personalInfo.js"></script>

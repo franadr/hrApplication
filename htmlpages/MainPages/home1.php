@@ -3,7 +3,7 @@
 session_start();
 ?>
 <!--This is the home page for HR,Admin and Staff group users -->
-<div class="container">
+<div class="container-fluid">
     <nav class="navbar navbar-default">
         <div class="container-fuild">
             <div class="navbar-header navbar-brand" >HR application</div>
@@ -23,7 +23,7 @@ session_start();
     <div class="row">
 
         <div id="selection">
-            <div class="col-md-4">
+            <div class="col-xs-4">
                 <p class="bg-info">Welcome to your personal page, you can review your registered personal information or search for a staff member
                 </p>
             </div>

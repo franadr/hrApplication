@@ -12,7 +12,7 @@ $users = json_decode($jsonusers);
     <div class="row">
         <div class="col-sm-6">
             <table class="table table-hover">
-                <h3> Registered staff list :</h3>
+
                 <thead>
                 <tr>
                     <th>Username</th>
@@ -36,7 +36,12 @@ $users = json_decode($jsonusers);
 </tbody>
 </table>
 </div>
-<div class="col-sm-6" id="selectedUser"><h6>Click a row to edit job data of a particular user</h6></div>
+<div class="col-sm-6" id="selectedUser">
+    <h3>Staff list and job data modification</h3>
+    <p>This page allows you to view and modify job data of a specific user</p>
+    <p>To view job data of a specific user, simply click on the row corresponding to the user</p>
+    <p>Then simply hit the save button to persist modified informations</p>
+</div>
 </div>
 <div class="row">
     <div class="col-sm-4"></div>
