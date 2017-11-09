@@ -4,6 +4,8 @@ require_once __DIR__."/../../scripts/php/dbscripts.php";
 
 $jsonusers = gatherAllUser();
 $users = json_decode($jsonusers);
+
+
 ?>
 <div class="container">
 
@@ -29,13 +31,12 @@ $users = json_decode($jsonusers);
         <td><?php echo $user->{'firstname'}; ?></td>
         <td><?php echo $user->{'lastname'}; ?></td>
         <td><?php echo $user->{'category'}; ?></td>
-        <!--<td><button class="btn btn-info" >select</button></td>-->
     </tr>
 <?php endforeach; ?>
 </tbody>
 </table>
 </div>
-<div class="col-sm-6" id="selectedUser"></div>
+<div class="col-sm-6" id="selectedUser"><h6>Click a row to edit job data of a particular user</h6></div>
 </div>
 <div class="row">
     <div class="col-sm-4"></div>

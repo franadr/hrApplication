@@ -44,45 +44,13 @@ require_once __DIR__."/../../scripts/php/dbscripts.php";
             <input type="text" class="form-control" id="photolink" value="<?php echo $userDecode->{'photolink'} ?>">
         </div>
 
+
+
         <button type="button" class="btn btn-default" id="submit">Save</button><span id="req"></span>
     </form>
 </div>
 
 <script src="../../scripts/js/personalInfo.js"></script>
-
-<!--
-<div class="col-md-4">
-    <h2>Personal information with Session</h2>
-    <form>
-        <div class="form-group" >
-            <label for="username">Username</label>
-            <input disabled type="text" class="form-control" id="username" value="<?php echo $_SESSION['username'] ?>">
-        </div>
-        <div class="form-group">
-            <label for="fname">First name</label>
-            <input type="text" class="form-control" id="fname" value="<?php echo $_SESSION['firstname'] ?>">
-        </div>
-        <div class="form-group">
-            <label for="lname">Last name</label>
-            <input type="text" class="form-control" id="lname" value="<?php echo $_SESSION['lastname'] ?>">
-        </div>
-        <div class="form-group">
-            <label for="bdate">Birthdate</label>
-            <input type="date" class="form-control" id="bdate" value="<?php echo $_SESSION['birthdate'] ?>">
-        </div>
-        <div class="form-group">
-            <label for="bplace">Birthpalce</label>
-            <input type="text" class="form-control" id="bplace" value="<?php echo $_SESSION['birthplace'] ?>">
-        </div>
-        <div class="form-group">
-            <label for="plink">Last name</label>
-            <input type="text" class="form-control" id="plink" value="<?php echo $_SESSION['photolink'] ?>">
-        </div>
-
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-</div>
--->
 
 <script src="../../scripts/js/jqueryui.js"></script>
 

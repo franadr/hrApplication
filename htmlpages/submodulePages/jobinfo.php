@@ -6,6 +6,7 @@ $jid = $_POST['sid'];
 //$staff = json_decode($user);
 $staff = json_decode(gatherAllInfo($jid));
 $staffCats=json_decode(getAllStaffcat());
+$faculties = json_decode(getAllFaculties());
 ?>
 <h3> Registered job Information for user : <?php echo $staff->{'firstname'}." ".$staff->{'lastname'} ?> </h3>
 <form id="jobDataForm">
@@ -41,6 +42,13 @@ $staffCats=json_decode(getAllStaffcat());
                 <option value="<?php echo $staffCat->{'scid'} ?>"><?php echo $staffCat->{'category'} ?></option>
             <?php endforeach; ?>
         </select>
+    </div>
+    <div class="form-group">
+        <div id="faculties" class="checkbox">
+            <?php foreach ($faculties as $faculty): ?>
+            <label><input name = "faculty" type="checkbox" value="<?php echo $faculty->{'fid'} ?>"><?php echo $faculty->{'faculty_name'} ?></label>
+            <?php endforeach; ?>
+        </div>
     </div>
     <button type="button" class="btn btn-default" id="saveJobData">Save Job data</button><span id="req"></span>
 </form>

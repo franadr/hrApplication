@@ -64,6 +64,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 $jobData->bank_account = $_POST['bank_account'];
                 $jobData->working_hours = $_POST['working_hours'];
                 $jobData->staff_cat = $_POST['staff_cat'];
+                $faculties=array();
+                $faculties = $_POST['faculties'];
+                if(count($faculties) > 0){
+                    removeFaculties($jobData->jid);
+                    saveFaculties($faculties,$jobData->jid);
+                }else{
+                    removeFaculties($jobData->jid);
+                }
                 saveJobData($jobData);
                 exit();
             }
@@ -85,6 +93,43 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             default: echo 'Not recognize method';exit;
         }
     };
+}
+
+function saveFaculties($faculties,$sid){
+    require __DIR__."/../config/dbconfig.php";
+    foreach ($faculties as $faculty){
+        $sql="insert into faculty_staff (fac_id,staff_id) values ('$faculty','$sid')";
+        $result = mysqli_query($db,$sql);
+        if($result)
+            echo 'ok';
+        else
+            echo $db->error;
+    }
+}
+
+function removeFaculties($sid){
+    require __DIR__."/../config/dbconfig.php";
+    $sql = "Delete from faculty_staff where staff_id = '$sid'";
+    if(mysqli_query($db,$sql))
+        echo "ok";
+    else
+        echo $db->error;
+}
+function getAllFaculties(){
+    require __DIR__."/../config/dbconfig.php";
+    $sql = "select * from faculty";
+
+    $result = mysqli_query($db,$sql);
+
+    $faculties = array();
+
+    while($r = mysqli_fetch_assoc($result)) {
+        $faculties[] = $r;
+    }
+
+    return json_encode($faculties);
+
+
 }
 function staffCatCheck($newCategory){
     require __DIR__."/../config/dbconfig.php";
@@ -176,21 +221,22 @@ function addUser($username,$password){
     }
 }
 
-
 /*
  * personal information gathering method
  */
-
 function gatherAllInfo($sid){
     require __DIR__."/../config/dbconfig.php";
-    $sql = "SELECT * FROM staff,personal_info,job_data,staff_cat  WHERE 
+    $sql = "SELECT * FROM staff,personal_info,job_data,staff_cat,faculty_staff  WHERE 
                                                                   staff.sid = '$sid' 
                                                                   AND personal_info.pid = '$sid'
                                                                   AND job_data.jid='$sid'
-                                                                  AND staff_cat.scid=job_data.staff_cat";
+                                                                  AND staff_cat.scid=job_data.staff_cat
+                                                                  AND (faculty_staff.staff_id = '$sid' OR TRUE)
+                                                                  ";
 
     $result = mysqli_query($db,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    echo $db->error;
     if($row['pid']){
         $_SESSION['personalInfoPresent'] = true;
         $_SESSION['firstname'] = $row['firstname'];

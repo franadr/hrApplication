@@ -5,6 +5,7 @@ $('#submit').click(function () {
     var birthdate = $('#birthdate').val();
     var birthplace = $('#birthplace').val();
     var phonenumber = $('#phonenumber').val();
+    var
 
 
     if(firstname && lastname && birthdate && birthplace && phonenumber){

@@ -68,14 +68,20 @@ $('#modStaffCatFac').click(function () {
 
 $('#saveJobData').click(function () {
 
-    jid = $('#jid').val();
-    contract_start = $('#contractStart').val();
-    contract_end = $('#contractEnd').val();
-    salary = $('#salary').val();
-    bank_account = $('#bankaccount').val();
-    working_hours = $('#hours').val();
-    staff_cat = $('#staff_cat').val();
+    var jid = $('#jid').val();
+    var contract_start = $('#contractStart').val();
+    var contract_end = $('#contractEnd').val();
+    var salary = $('#salary').val();
+    var bank_account = $('#bankaccount').val();
+    var working_hours = $('#hours').val();
+    var staff_cat = $('#staff_cat').val();
 
+    var faculties=[];
+    $.each($('input[name="faculty"]:checked'), function(){
+        faculties.push($(this).val());
+    });
+
+    alert(faculties);
     if(contract_start && contract_end && salary && bank_account && working_hours && staff_cat){
         $.ajax({
             type: "POST",
@@ -87,7 +93,8 @@ $('#saveJobData').click(function () {
                 "salary":salary,
                 "bank_account":bank_account,
                 "working_hours":working_hours,
-                "staff_cat":staff_cat},
+                "staff_cat":staff_cat,
+                "faculties":faculties},
             success: function(msg){
                 alert(msg);
                 $.get("../htmlpages/submodulePages/userlist2.php",false,function (msg) {
