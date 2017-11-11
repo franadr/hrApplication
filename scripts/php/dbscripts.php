@@ -100,12 +100,23 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                  uploadPhoto($photo,$username);
                  exit();
             }
+            case 'search':{
+                $word = $_POST['search'];
+                $type = $_POST['type'];
+                if($type == 'all'){
+                    searchAll();
+                    exit();
+                }
+                search($word);
+                exit();
+            }
             default: echo 'Not recognize method';exit;
         }
     };
 }
 
 function getAlladdress($sid,$type){
+    require __DIR__."/../config/dbconfig.php";
     $sql = "select * from address where sid = '$sid' AND add_type = '$type'";
     $result = mysqli_query($db,$sql);
 
@@ -118,6 +129,63 @@ function getAlladdress($sid,$type){
     return json_encode($addressS);
 }
 
+function searchAll(){
+    require __DIR__."/../config/dbconfig.php";
+    $sql = "select DISTINCT(staff.sid),personal_info.phonenumber,personal_info.firstname,personal_info.lastname,staff_cat.category,sup_info.firstname as supfname,sup_info.lastname as suplname from (((((((
+                          staff left join personal_info on staff.sid = personal_info.pid) 
+                          left join job_data on staff.sid = job_data.jid)
+                          left join faculty_staff on staff.sid = faculty_staff.staff_id) 
+                          left join faculty on faculty_staff.fac_id = faculty.fid)
+                          left join staff as sup on staff.supervisor_id = sup.sid)
+                          left join personal_info as sup_info on sup.sid = sup_info.pid)
+                          left join staff_cat on job_data.staff_cat = staff_cat.scid)
+            
+           ";
+
+    $result = mysqli_query($db,$sql);
+
+    $searchRes = array();
+
+    while($r = mysqli_fetch_assoc($result)) {
+        $searchRes[] = $r;
+    }
+    echo $db->error;
+    echo json_encode($searchRes);
+    exit;
+
+
+}
+function search($word){
+    require __DIR__."/../config/dbconfig.php";
+
+    $sql = "select DISTINCT(staff.sid),personal_info.phonenumber,personal_info.firstname,personal_info.lastname,staff_cat.category,sup_info.firstname as supfname,sup_info.lastname as suplname from (((((((
+                          staff left join personal_info on staff.sid = personal_info.pid) 
+                          left join job_data on staff.sid = job_data.jid)
+                          left join faculty_staff on staff.sid = faculty_staff.staff_id) 
+                          left join faculty on faculty_staff.fac_id = faculty.fid)
+                          left join staff as sup on staff.supervisor_id = sup.sid)
+                          left join personal_info as sup_info on sup.sid = sup_info.pid)
+                          left join staff_cat on job_data.staff_cat = staff_cat.scid)
+                          
+            where 
+            (personal_info.firstname like '%$word%')
+            or (personal_info.lastname like '%$word%')
+            or (faculty_name like '%$word%')
+            or (sup_info.firstname like '%$word%')
+            or (sup_info.lastname like '%$word%')
+            or (staff_cat.category like '%$word%')
+            ";
+    $result = mysqli_query($db,$sql);
+
+    $searchRes = array();
+
+    while($r = mysqli_fetch_assoc($result)) {
+        $searchRes[] = $r;
+    }
+    echo $db->error;
+    echo json_encode($searchRes);
+    exit;
+}
 function uploadPhoto($photo,$username){
     if (isset($photo['name'])) {
         if (0 < $photo['error']) {
@@ -148,8 +216,11 @@ function saveFaculties($faculties,$sid){
 function removeFaculties($sid){
     require __DIR__."/../config/dbconfig.php";
     $sql = "Delete from faculty_staff where staff_id = '$sid'";
-    if(mysqli_query($db,$sql))
+    if(mysqli_query($db,$sql)){
+        echo $db->error;
         echo "ok";
+    }
+
     else
         echo $db->error;
 }
@@ -264,15 +335,15 @@ function addUser($username,$password){
  */
 function gatherAllInfo($sid){
     require __DIR__."/../config/dbconfig.php";
-    $sql = "SELECT * FROM staff,personal_info,job_data,staff_cat,faculty_staff  WHERE 
-                                                                  staff.sid = '$sid' 
-                                                                  AND personal_info.pid = '$sid'
-                                                                  AND job_data.jid='$sid'
-                                                                  AND staff_cat.scid=job_data.staff_cat
-                                                                  AND (faculty_staff.staff_id = '$sid' OR TRUE)
-                                                                  ";
+
+    $sql="select * from (((((staff LEFT join personal_info on staff.sid=personal_info.pid)
+                                  left join job_data on staff.sid = job_data.jid)
+                                  left join staff_cat on job_data.staff_cat=staff_cat.scid)
+                                  left join faculty_staff on staff.sid =faculty_staff.staff_id)
+                                  left join faculty on faculty_staff.fac_id = faculty.fid) where staff.sid = '$sid'";
 
     $result = mysqli_query($db,$sql);
+    echo $db->error;
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     echo $db->error;
     if($row['pid']){

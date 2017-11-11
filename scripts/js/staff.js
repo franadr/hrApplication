@@ -21,3 +21,14 @@ $('#modpass').click(function refresh() {
         }
     });
 });
+
+$('#search').click(function refresh() {
+
+    $.ajax({
+        type: "GET",
+        url: "../htmlpages/submodulePages/search.php",
+        success: function(msg){
+            $("#selection").html(msg);
+        }
+    });
+});

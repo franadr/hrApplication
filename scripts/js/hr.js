@@ -11,11 +11,11 @@ $('#pinfo').click(function () {
     });
 });
 
-$('#search').click(function () {
+$('#search').click(function refresh() {
 
     $.ajax({
         type: "GET",
-        url: "../htmlpages/submodulePages/userList.php",
+        url: "../htmlpages/submodulePages/search.php",
         success: function(msg){
             $("#selection").html(msg);
         }
