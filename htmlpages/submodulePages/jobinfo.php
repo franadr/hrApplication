@@ -7,6 +7,15 @@ $jid = $_POST['sid'];
 $staff = json_decode(gatherAllInfo($jid));
 $staffCats=json_decode(getAllStaffcat());
 $faculties = json_decode(getAllFaculties());
+$supervisors = json_decode(gatherAllUser());
+$supervisor = json_decode(gatherAllInfo($staff->{'supervisor_id'}));
+$filteredSupervisor = Array();
+
+//loop to exclude self user as supervisor
+foreach ($supervisors as $sup){
+    if($sup->{'sid'} !== $jid)
+        $filteredSupervisor[] = $sup;
+}
 ?>
 <h3> Registered job Information for user : <?php echo $staff->{'firstname'}." ".$staff->{'lastname'} ?> </h3>
 <form id="jobDataForm">
@@ -40,6 +49,15 @@ $faculties = json_decode(getAllFaculties());
             <option selected value="<?php echo $staff->{'scid'} ?>"><?php echo $staff->{'category'} ?></option>
             <?php foreach ($staffCats as $staffCat) :?>
                 <option value="<?php echo $staffCat->{'scid'} ?>"><?php echo $staffCat->{'category'} ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="supervisor">Is supervised by</label>
+        <select class="form-control" id="supervisor">
+            <option selected value="<?php echo $staff->{'supervisor_id'} ?>"><?php echo $supervisor->{'firstname'}." ".$supervisor->{'lastname'} ?></option>
+            <?php foreach ($filteredSupervisor as $supervisor) :?>
+                <option value="<?php echo $supervisor->{'sid'} ?>"><?php echo $supervisor->{'firstname'}." ".$supervisor->{'lastname'} ?></option>
             <?php endforeach; ?>
         </select>
     </div>

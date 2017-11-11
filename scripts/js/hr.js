@@ -75,13 +75,13 @@ $('#saveJobData').click(function () {
     var bank_account = $('#bankaccount').val();
     var working_hours = $('#hours').val();
     var staff_cat = $('#staff_cat').val();
+    var supervisor = $('#supervisor').val();
 
     var faculties=[];
     $.each($('input[name="faculty"]:checked'), function(){
         faculties.push($(this).val());
     });
 
-    alert(faculties);
     if(contract_start && contract_end && salary && bank_account && working_hours && staff_cat){
         $.ajax({
             type: "POST",
@@ -94,7 +94,8 @@ $('#saveJobData').click(function () {
                 "bank_account":bank_account,
                 "working_hours":working_hours,
                 "staff_cat":staff_cat,
-                "faculties":faculties},
+                "faculties":faculties,
+                "supervisor_id":supervisor},
             success: function(msg){
                 alert(msg);
                 $.get("../htmlpages/submodulePages/userlist2.php",false,function (msg) {

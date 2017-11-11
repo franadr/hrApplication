@@ -21,6 +21,8 @@ if(count($pinfoMod) > 0){
                     <th>Birthdate</th>
                     <th>Birthplace</th>
                     <th>Phone number</th>
+                    <th>Primary address</th>
+                    <th>Secondary address</th>
                     <th>Options ?</th>
                 </tr>
                 </thead>
@@ -33,6 +35,8 @@ if(count($pinfoMod) > 0){
                         <td><?php echo $pinfo->{'birthdate'}; ?></td>
                         <td><?php echo $pinfo->{'birthplace'}; ?></td>
                         <td><?php echo $pinfo->{'phonenumber'}; ?></td>
+                        <td><?php echo $pinfo->{'pri_address'}; ?></td>
+                        <td><?php echo $pinfo->{'sec_address'}; ?></td>
                         <td><button class="btn success" onclick="validateMod('<?php echo $pinfo->{'pid'}; ?>')">Validate</button>
                         <button class="btn danger" onclick="rejectMod('<?php echo $pinfo->{'pid'}; ?>')">Reject</button></td>
                     </tr>

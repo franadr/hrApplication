@@ -5,10 +5,12 @@ $('#submit').click(function () {
     var birthdate = $('#birthdate').val();
     var birthplace = $('#birthplace').val();
     var phonenumber = $('#phonenumber').val();
+    var priaddress = $('#priaddress').val();
+    var secaddress = $('#secaddress').val();
 
 
 
-    if(firstname && lastname && birthdate && birthplace && phonenumber){
+    if(firstname && lastname && birthdate && birthplace && phonenumber && priaddress){
         $.ajax({
             type: "POST",
             url: "/../scripts/php/dbscripts.php",
@@ -18,12 +20,12 @@ $('#submit').click(function () {
                 "lastname":lastname,
                 "birthdate":birthdate,
                 "birthplace":birthplace,
-                "phonenumber":phonenumber
+                "phonenumber":phonenumber,
+                "priaddress":priaddress,
+                "secaddress":secaddress
             },
             success: function(msg){
                 alert(msg);
-                $('#message').html("<h2>Your modification request has been registered please wait for its validation by HR department</h2>")
-
             }
         });
     }else

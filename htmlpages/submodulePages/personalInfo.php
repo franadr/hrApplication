@@ -2,7 +2,11 @@
 session_start();
 require_once __DIR__."/../../scripts/php/dbscripts.php";
     $user = gatherAllInfo($_SESSION['sid']);
+//    $PriAddressS = json_decode(getAlladdress($_SESSION['sid'],"pri"));
+//    $SecAddressS = json_decode(getAlladdress($_SESSION['sid'],"sec"));
     $userDecode = json_decode($user);
+
+
 ?>
 
 <!--This file hold the personal info form module that permit a user to do a personal info modification request -->
@@ -57,9 +61,15 @@ require_once __DIR__."/../../scripts/php/dbscripts.php";
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-xs-6">
-                <label for="address">*Primary Address</label>
-                <input type="text" class="form-control" id="address" value="none...">
+            <div class="col-xs-8">
+                <label for="priaddress">*Primary Address</label>
+                <input type="text" class="form-control" id="priaddress" value="<?php echo $userDecode->{'pri_address'} ?>">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-xs-8">
+                <label for="secaddress">Secondary Address</label>
+                <input type="text" class="form-control" id="secaddress" value="<?php echo $userDecode->{'sec_address'} ?>">
             </div>
         </div>
         <div class="form-group row">

@@ -39,6 +39,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 $user->phonenumber = $_POST['phonenumber'];
                 $user->photolink = $_POST['photolink'];
                 $user->password = $_POST['password'];
+                $user->priaddress = $_POST['priaddress'];
+                $user->secaddress = $_POST['secaddress'];
 
                 insertPersonalInfoMod(json_encode($user));
                 exit();
@@ -64,6 +66,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 $jobData->bank_account = $_POST['bank_account'];
                 $jobData->working_hours = $_POST['working_hours'];
                 $jobData->staff_cat = $_POST['staff_cat'];
+                $jobData->supervisor = $_POST['supervisor_id'];
                 $faculties=array();
                 $faculties = $_POST['faculties'];
                 if(count($faculties) > 0){
@@ -72,6 +75,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 }else{
                     removeFaculties($jobData->jid);
                 }
+                var_dump("first ".$jobData->supervisor);
                 saveJobData($jobData);
                 exit();
             }
@@ -99,6 +103,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             default: echo 'Not recognize method';exit;
         }
     };
+}
+
+function getAlladdress($sid,$type){
+    $sql = "select * from address where sid = '$sid' AND add_type = '$type'";
+    $result = mysqli_query($db,$sql);
+
+    $addressS = array();
+
+    while($r = mysqli_fetch_assoc($result)) {
+        $addressS[] = $r;
+    }
+
+    return json_encode($addressS);
 }
 
 function uploadPhoto($photo,$username){
@@ -306,14 +323,16 @@ function insertPersonalInfoMod($user)
     require __DIR__."/../config/dbconfig.php";
     $sid = $_SESSION['sid'];
     $userdecode=json_decode($user);
-
-    $sql = "INSERT into personal_info_mod (pid,firstname,lastname,birthdate,birthplace,phonenumber,photolink) VALUES ( '$sid',
+    var_dump($userdecode->secaddress);
+    $sql = "INSERT into personal_info_mod (pid,firstname,lastname,birthdate,birthplace,phonenumber,photolink,pri_address,sec_address) VALUES ( '$sid',
                                                                                             '$userdecode->firstname',
                                                                                             '$userdecode->lastname',
                                                                                             '$userdecode->birthdate',
                                                                                             '$userdecode->birthplace',
                                                                                             '$userdecode->phonenumber',
-                                                                                            '$userdecode->photoLink'
+                                                                                            '$userdecode->photoLink',
+                                                                                            '$userdecode->priaddress',
+                                                                                            '$userdecode->secaddress'
                                                                                             )";
     if(mysqli_query($db, $sql)){
         echo 'personal informations modification requested, an HR member needs to validate them';
@@ -370,20 +389,24 @@ function savePinfo($pid){
     require __DIR__."/../config/dbconfig.php";
     $pInfoTosave = json_decode(gatherPersonalInfoMod($pid));
 
-    $sql = "INSERT into personal_info (pid,firstname,lastname,birthdate,birthplace,phonenumber,photolink) VALUES ( '$pid',
+    $sql = "INSERT into personal_info (pid,firstname,lastname,birthdate,birthplace,phonenumber,photolink,pri_address,sec_address) VALUES ( '$pid',
                                                                                             '$pInfoTosave->firstname',
                                                                                             '$pInfoTosave->lastname',
                                                                                             '$pInfoTosave->birthdate',
                                                                                             '$pInfoTosave->birthplace',
                                                                                             '$pInfoTosave->phonenumber',
-                                                                                            '$pInfoTosave->photoLink'
+                                                                                            '$pInfoTosave->photoLink',
+                                                                                            '$pInfoTosave->pri_address',
+                                                                                            '$pInfoTosave->sec_address'
                                                                                             ) ON DUPLICATE KEY UPDATE 
                                                                                             firstname='$pInfoTosave->firstname',
                                                                                             lastname='$pInfoTosave->lastname',
                                                                                             birthdate='$pInfoTosave->birthdate',
                                                                                             birthplace='$pInfoTosave->birthplace',
                                                                                             phonenumber='$pInfoTosave->phonenumber',
-                                                                                            photolink='$pInfoTosave->photoLink'";
+                                                                                            photolink='$pInfoTosave->photoLink',
+                                                                                            pri_address = '$pInfoTosave->pri_address',
+                                                                                            sec_address= '$pInfoTosave->sec_address'";
     if(mysqli_query($db, $sql)){
         $sql = "DELETE from personal_info_mod where pid = $pid";
         mysqli_query($db, $sql);
@@ -399,7 +422,7 @@ function savePinfo($pid){
 
 function saveJobData($jobData){
     require __DIR__."/../config/dbconfig.php";
-
+    var_dump("second ".$jobData->supervisor);
 
     $sql = "INSERT into job_data (jid,contract_start,contract_end,salary,bank_account,working_hours,staff_cat) VALUES ( '$jobData->jid',
                                                                                             '$jobData->contract_start',
@@ -418,7 +441,10 @@ function saveJobData($jobData){
                                                                                             working_hours='$jobData->working_hours',
                                                                                             staff_cat='$jobData->staff_cat'";
     if(mysqli_query($db, $sql)){
+        $sql = "update staff set supervisor_id = '$jobData->supervisor' where sid = $jobData->jid";
+        if(mysqli_query($db,$sql))
         echo 'Job data saved';
+        else echo $db->error;
         return 'ok';
     }
 
