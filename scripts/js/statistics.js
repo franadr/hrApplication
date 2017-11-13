@@ -104,6 +104,7 @@ $(function() {
         type: "POST",
         url: "../scripts/php/dbscripts.php",
         data:{"method":"salaryavg"},
+
         success: function(msg){
             console.log(msg);
             var arr = [];

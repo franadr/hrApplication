@@ -1,5 +1,15 @@
 //This file holds the method to managed the selection of the user (showing a Submodule) and function related to hr user
 
+$(function () {
+    $('#showChangeFac').hide();
+});
+
+$('#changeFac').click(function () {
+    $('#showCurrentFac').hide();
+    $('#showChangeFac').show();
+    $('#changeFac').hide();
+
+})
 $('#pinfo').click(function () {
 
     $.ajax({
@@ -32,7 +42,16 @@ $('#jobinfo').click(function () {
         }
     });
 });
+$('#stats').click(function refresh() {
 
+    $.ajax({
+        type: "GET",
+        url: "../htmlpages/submodulePages/statistics.php",
+        success: function(msg){
+            $("#selection").html(msg);
+        }
+    });
+});
 $('#modStaff').click(function refresh() {
 
     $.ajax({

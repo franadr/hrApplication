@@ -126,6 +126,20 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         }
     };
 }
+
+function getUserFaculties($jid){
+    require __DIR__."/../config/dbconfig.php";
+    $sql = "select faculty.faculty_name from faculty_staff left join faculty on faculty_staff.fac_id = faculty.fid where faculty_staff.staff_id='$jid'";
+    $result = mysqli_query($db,$sql);
+
+    $faculties = array();
+
+    while($r = mysqli_fetch_assoc($result)) {
+        $faculties[] = $r;
+    }
+    echo $db->error;
+    return json_encode($faculties);
+}
 function salaryAVG(){
     require __DIR__."/../config/dbconfig.php";
     $sql = "select faculty.faculty_name,avg(job_data.salary) as salary from ((faculty left join faculty_staff on faculty.fid = faculty_staff.fac_id ) left join job_data on faculty_staff.staff_id = job_data.jid) group by faculty.faculty_name ";

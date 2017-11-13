@@ -5,11 +5,13 @@ $jid = $_POST['sid'];
 //$user = gatherJobInfo($jid);
 //$staff = json_decode($user);
 $staff = json_decode(gatherAllInfo($jid));
+
 $staffCats=json_decode(getAllStaffcat());
 $faculties = json_decode(getAllFaculties());
 $supervisors = json_decode(gatherAllUser());
 $supervisor = json_decode(gatherAllInfo($staff->{'supervisor_id'}));
 $filteredSupervisor = Array();
+$userFaculties = json_decode(getUserFaculties($jid));
 
 //loop to exclude self user as supervisor
 foreach ($supervisors as $sup){
@@ -61,13 +63,26 @@ foreach ($supervisors as $sup){
             <?php endforeach; ?>
         </select>
     </div>
+
     <div class="form-group">
-        <div id="faculties" class="checkbox">
-            <?php foreach ($faculties as $faculty): ?>
-            <label><input name = "faculty" type="checkbox" value="<?php echo $faculty->{'fid'} ?>"><?php echo $faculty->{'faculty_name'} ?></label>
-            <?php endforeach; ?>
+        <button type="button" class="btn btn-default btn-xs" id="changeFac"> change Faculty</button>
+        <div class="form-group" id="showChangeFac">
+            <div id="faculties" class="checkbox">
+                <?php foreach ($faculties as $faculty): ?>
+                    <label><input name = "faculty" type="checkbox" value="<?php echo $faculty->{'fid'} ?>"><?php echo $faculty->{'faculty_name'} ?></label>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <div id="showCurrentFac">
+            <p> User currently member of :
+                <?php foreach ($userFaculties as $faculty): ?>
+                    <?php echo $faculty->{'faculty_name'} ?>
+                <?php endforeach; ?>
+            </p>
         </div>
     </div>
+
     <button type="button" class="btn btn-default" id="saveJobData">Save Job data</button><span id="req"></span>
 </form>
 <script src="../../scripts/js/hr.js"></script>

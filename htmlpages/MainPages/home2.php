@@ -22,6 +22,7 @@ session_start();
                 </li>
                 <li> <a id="search" type="button">Search for staff</a></li>
                 <li><a id="modpass" type="button">Modify Password</a></li>
+                <li><a id="stats">UL statistics</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                <li><a id="pinfo" type="button"><span class="glyphicon glyphicon-user" ></span> My info</a></li>
