@@ -9,8 +9,6 @@
             <ul class="nav navbar-nav">
                 <li><a id="userlist">User list</a></li>
                 <li><a id="adduser">Add user</a></li>
-                <li><a id="moduser">Modify user</a></li>
-                <li><a id="deluser">Delete user</a></li>
                 <li><a id="modpass">Modify Password</a></li>
 
             </ul>

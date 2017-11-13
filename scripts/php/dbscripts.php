@@ -110,11 +110,62 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 search($word);
                 exit();
             }
+            case 'facultyCount':{
+                echo facultyCount();
+                exit;
+            }
+            case 'catcount':{
+                echo categoryCount();
+                exit;
+            }
+            case 'salaryavg':{
+                echo salaryAVG();
+                exit;
+            }
             default: echo 'Not recognize method';exit;
         }
     };
 }
+function salaryAVG(){
+    require __DIR__."/../config/dbconfig.php";
+    $sql = "select faculty.faculty_name,avg(job_data.salary) as salary from ((faculty left join faculty_staff on faculty.fid = faculty_staff.fac_id ) left join job_data on faculty_staff.staff_id = job_data.jid) group by faculty.faculty_name ";
+    $result = mysqli_query($db,$sql);
 
+    $salaryCount = array();
+
+    while($r = mysqli_fetch_assoc($result)) {
+        $salaryCount[] = $r;
+    }
+    echo $db->error;
+    return json_encode($salaryCount);
+}
+
+function categoryCount(){
+    require __DIR__."/../config/dbconfig.php";
+    $sql = "select staff_cat.category,count(job_data.staff_cat) as catcount from staff_cat left join job_data on staff_cat.scid = job_data.staff_cat group by staff_cat.category ";
+    $result = mysqli_query($db,$sql);
+
+    $catcount = array();
+
+    while($r = mysqli_fetch_assoc($result)) {
+        $catcount[] = $r;
+    }
+    echo $db->error;
+    return json_encode($catcount);
+}
+function  facultyCount(){
+    require __DIR__."/../config/dbconfig.php";
+    $sql = "select faculty.faculty_name,count(faculty_staff.staff_id) as staffcount from faculty left join faculty_staff on faculty.fid = faculty_staff.fac_id GROUP by faculty.faculty_name";
+    $result = mysqli_query($db,$sql);
+
+    $facultyCount = array();
+
+    while($r = mysqli_fetch_assoc($result)) {
+        $facultyCount[] = $r;
+    }
+    echo $db->error;
+    return json_encode($facultyCount);
+}
 function getAlladdress($sid,$type){
     require __DIR__."/../config/dbconfig.php";
     $sql = "select * from address where sid = '$sid' AND add_type = '$type'";

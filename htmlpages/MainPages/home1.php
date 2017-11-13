@@ -8,10 +8,9 @@ session_start();
         <div class="container-fuild">
             <div class="navbar-header navbar-brand" >HR application</div>
             <ul class="nav navbar-nav">
-
-                <li> <a id="jobinfo">View your job info</a></li>
                 <li> <a id="search">Search for staff</a></li>
                 <li><a id="modpass">Modify Password</a></li>
+                <li><a id="stats">UL statistics</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a id="pinfo" type="button"><span class="glyphicon glyphicon-user" ></span> My info</a></li>

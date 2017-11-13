@@ -22,12 +22,8 @@ session_destroy();
     </nav>
 
     <div class="row" >
-        <div class="col-sm-4 ">
 
-        </div>
-        <div class="col-sm-4">
-        </div>
-        <div class="col-sm-4"></div>
+        <h3> Please use your credential to login to the application</h3>
     </div>
     <div class="row">
         <div class="col-sm-4"></div>

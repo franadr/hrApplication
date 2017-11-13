@@ -32,3 +32,15 @@ $('#search').click(function refresh() {
         }
     });
 });
+
+
+$('#stats').click(function refresh() {
+
+    $.ajax({
+        type: "GET",
+        url: "../htmlpages/submodulePages/statistics.php",
+        success: function(msg){
+            $("#selection").html(msg);
+        }
+    });
+});
